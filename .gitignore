@@ -1,3 +1,22 @@
+# Ignore outputs
+checkpoints/
+logs/
+checkpoints_256
+
+# Feature folders
+dataset/CrossTask/crosstask_features
+dataset/CrossTask/crosstask_s3d.zip
+dataset/NIV/NIV_s3d.zip
+dataset/NIV/processed_data
+dataset/COIN/COIN_s3d.zip
+dataset/COIN/full_npy
+
+# Cluster script
+scripts/niv.py
+
+# Virtual environment
+my_venv/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
