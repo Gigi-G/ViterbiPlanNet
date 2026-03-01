@@ -1,0 +1,170 @@
+[
+    {
+        "feature": "changing_tire_0001.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0004.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0005.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0007.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0012.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0020.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0021.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0022.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0025.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "changing_tire_0030.npy",
+        "task_id": 0
+    },
+    {
+        "feature": "coffee_0001.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "coffee_0007.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "coffee_0014.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "coffee_0018.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "coffee_0019.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "coffee_0023.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "coffee_0025.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "coffee_0027.npy",
+        "task_id": 1
+    },
+    {
+        "feature": "cpr_0002.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0006.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0012.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0013.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0016.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0017.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0019.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0021.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0023.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "cpr_0026.npy",
+        "task_id": 2
+    },
+    {
+        "feature": "jump_car_0001.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0009.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0011.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0017.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0018.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0020.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0025.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0028.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "jump_car_0029.npy",
+        "task_id": 3
+    },
+    {
+        "feature": "repot_0004.npy",
+        "task_id": 4
+    },
+    {
+        "feature": "repot_0015.npy",
+        "task_id": 4
+    },
+    {
+        "feature": "repot_0018.npy",
+        "task_id": 4
+    },
+    {
+        "feature": "repot_0025.npy",
+        "task_id": 4
+    },
+    {
+        "feature": "repot_0029.npy",
+        "task_id": 4
+    }
+]

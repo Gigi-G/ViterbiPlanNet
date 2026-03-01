@@ -1,0 +1,60 @@
+{
+    "0_Changing a car tire": {
+        "9": "get things out",
+        "0": "start loose",
+        "1": "jack up",
+        "2": "unscrew wheel",
+        "3": "withdraw wheel",
+        "4": "put wheel",
+        "5": "screw wheel",
+        "6": "jack down",
+        "7": "tight wheel",
+        "8": "brake on",
+        "10": "put things back"
+    },
+    "1_making coffee": {
+        "19": "fill water",
+        "22": "put filter",
+        "24": "see coffee",
+        "26": "pour cofee",
+        "28": "grind coffe",
+        "20": "add coffee",
+        "21": "even surface",
+        "23": "screw top",
+        "27": "put stove",
+        "25": "withdraw stove"
+    },
+    "2_perform cardio pulmonary ressucitation": {
+        "30": "check response",
+        "34": "open airway",
+        "29": "check breathing",
+        "31": "give breath",
+        "32": "give compression",
+        "33": "check pulse",
+        "35": "call emergency"
+    },
+    "3_jump car battery": {
+        "36": "get car",
+        "47": "open hood",
+        "37": "connect redempty",
+        "38": "connect redfull",
+        "39": "connect black",
+        "40": "ground black",
+        "41": "start fullcar",
+        "42": "start emptycar",
+        "43": "remove ground",
+        "44": "remove black",
+        "45": "disconnect redfull",
+        "46": "disconnect redempty"
+    },
+    "4_repotting plant": {
+        "17": "tap pot",
+        "12": "take plant",
+        "14": "place plant",
+        "15": "add top",
+        "11": "put soil",
+        "13": "loosen root",
+        "16": "water plant",
+        "18": "cover hole"
+    }
+}

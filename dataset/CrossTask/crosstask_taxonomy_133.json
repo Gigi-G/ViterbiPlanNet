@@ -1,0 +1,171 @@
+{
+    "0_23521_Make Jello Shots": {
+        "0": "pour water",
+        "1": "pour juice",
+        "2": "pour jello powder",
+        "3": "pour alcohol",
+        "4": "stir mixture",
+        "5": "pour mixture into cup"
+    },
+    "1_59684_Build Simple Floating Shelves": {
+        "6": "cut shelve",
+        "7": "assemble shelve",
+        "8": "sand shelve",
+        "9": "paint shelve",
+        "10": "attach shelve"
+    },
+    "2_71781_Make Taco Salad": {
+        "11": "add onion",
+        "12": "add taco",
+        "13": "add lettuce",
+        "14": "add meat",
+        "15": "add tomato",
+        "16": "add cheese",
+        "17": "stir",
+        "18": "add tortilla"
+    },
+    "3_113766_Grill Steak": {
+        "19": "season steak",
+        "20": "put steak on grill",
+        "21": "close lid",
+        "22": "open lid",
+        "23": "move steak on grill",
+        "24": "flip steak",
+        "25": "check temperature",
+        "26": "take steak from grill",
+        "27": "top steak",
+        "28": "cut steak",
+        "29": "taste steak"
+    },
+    "4_105222_Make Kimchi Fried Rice": {
+        "30": "add onion",
+        "31": "add rice",
+        "32": "add ham",
+        "33": "add kimchi",
+        "34": "pour sesame oil",
+        "35": "stir mixture"
+    },
+    "5_94276_Make Meringue": {
+        "36": "pour egg",
+        "37": "add sugar",
+        "38": "whisk mixture",
+        "39": "put mixture into bag",
+        "40": "spread mixture",
+        "41": "put meringue into oven"
+    },
+    "6_53193_Make a Latte": {
+        "42": "add coffee",
+        "43": "press coffee",
+        "44": "pour water",
+        "45": "pour espresso",
+        "46": "steam milk",
+        "47": "pour milk"
+    },
+    "7_105253_Make Bread and Butter Pickles": {
+        "48": "cut cucumber",
+        "49": "cut onion",
+        "50": "add salt",
+        "51": "pour water",
+        "52": "pour vinegar",
+        "53": "add sugar",
+        "54": "add spices",
+        "55": "put vegetables in water",
+        "56": "pack cucumbers in jar",
+        "57": "seal jar",
+        "58": "put jar in water"
+    },
+    "8_44047_Make Lemonade": {
+        "59": "cut lemon",
+        "60": "add sugar",
+        "61": "squeeze lemon",
+        "62": "pour lemon juice",
+        "63": "pour water",
+        "64": "stir mixture",
+        "65": "add ice",
+        "66": "pour lemonade into glass"
+    },
+    "9_76400_Make French Toast": {
+        "67": "pour milk",
+        "68": "whisk mixture",
+        "69": "pour egg",
+        "70": "dip bread in mixture",
+        "71": "melt butter",
+        "72": "put bread in pan",
+        "73": "add vanilla extract",
+        "74": "flip bread",
+        "75": "remove bread from pan",
+        "76": "top toast"
+    },
+    "10_16815_Jack Up a Car": {
+        "77": "brake on",
+        "78": "raise jack",
+        "79": "lower jack"
+    },
+    "11_95603_Make Kerala Fish Curry": {
+        "80": "add onion",
+        "81": "add chili powder",
+        "82": "pour water",
+        "83": "add mustard seeds",
+        "84": "add curry leaves",
+        "85": "add fish",
+        "86": "stir mixture"
+    },
+    "12_109972_Make Banana Ice Cream": {
+        "87": "peel banana",
+        "88": "cut banana",
+        "89": "put bananas into blender",
+        "90": "pour milk",
+        "91": "mix ingredients"
+    },
+    "13_44789_Add Oil to Your Car": {
+        "92": "remove cap",
+        "93": "put funnel",
+        "94": "pour oil",
+        "95": "remove funnel",
+        "96": "close cap",
+        "97": "pull out dipstick",
+        "98": "wipe off dipstick",
+        "99": "insert dipstick"
+    },
+    "14_40567_Change a Tire": {
+        "100": "brake on",
+        "101": "get things out",
+        "102": "start loose",
+        "103": "jack up",
+        "104": "unscrew wheel",
+        "105": "withdraw wheel",
+        "106": "put wheel",
+        "107": "screw wheel",
+        "108": "jack down",
+        "109": "tight wheel",
+        "110": "put things back"
+    },
+    "15_77721_Make Irish Coffee": {
+        "111": "pour alcohol",
+        "112": "pour espresso",
+        "113": "add sugar",
+        "114": "stir mixture",
+        "115": "add whipped cream"
+    },
+    "16_87706_Make French Strawberry Cake": {
+        "116": "pour egg",
+        "117": "add sugar",
+        "118": "add flour",
+        "119": "add butter",
+        "120": "whisk mixture",
+        "121": "put dough into form",
+        "122": "spread creme upon cake",
+        "123": "cut strawberries",
+        "124": "add strawberries to cake"
+    },
+    "17_91515_Make Pancakes": {
+        "125": "add flour",
+        "126": "add sugar",
+        "127": "pour milk",
+        "128": "pour egg",
+        "129": "whisk mixture",
+        "130": "pour mixture into pan",
+        "131": "flip pancake",
+        "132": "take pancake from pan"
+    }
+}
