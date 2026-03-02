@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ViterbiPlanNet — CVPR 2026</title>
+
+  <!-- Bulma -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;600;700&family=Castoro&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #0b1020;
+      --muted: rgba(11,16,32,0.72);
+      --muted2: rgba(11,16,32,0.55);
+      --line: rgba(11,16,32,0.10);
+      --panel: rgba(11,16,32,0.03);
+      --accent: #2563eb;   /* blue */
+      --accent2: #7c3aed;  /* purple */
+      --shadow: 0 10px 30px rgba(2,6,23,0.08);
+    }
+
+    html, body{
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Avoid anchor jumps hiding headings under sticky navbar */
+    section[id]{
+      scroll-margin-top: 92px;
+    }
+
+    /* -----------------------------
+       INTRO (teaser overlay)
+    ------------------------------ */
+    #intro{
+      position: fixed;
+      inset: 0;
+      background: #020617;
+      display: grid;
+      place-items: center;
+      z-index: 9999;
+      animation: introFadeOut 0.9s ease forwards;
+      animation-delay: 3.6s;
+    }
+    .logo-wrapper{ text-align:center; }
+    .logo{ width: 260px; height: 130px; }
+    .logo path{
+      stroke: #38bdf8;
+      stroke-width: 3;
+      fill: transparent;
+      stroke-dasharray: 700;
+      stroke-dashoffset: 700;
+      animation: drawLogo 2.2s ease forwards;
+    }
+    .logo-text{
+      margin-top: 18px;
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      font-size: 2.1rem;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+      animation: textReveal 0.85s ease forwards;
+      animation-delay: 1.95s;
+    }
+    .logo-sub{
+      margin-top: 10px;
+      color: rgba(255,255,255,0.70);
+      font-family: "Castoro", serif;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: textReveal 0.85s ease forwards;
+      animation-delay: 2.15s;
+    }
+    @keyframes drawLogo{ to{ stroke-dashoffset: 0; } }
+    @keyframes textReveal{ to{ opacity:1; transform: translateY(0) scale(1);} }
+    @keyframes introFadeOut{ to{ opacity:0; visibility:hidden; } }
+
+    /* -----------------------------
+       NAVBAR
+    ------------------------------ */
+    .navbar.is-project{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar.is-project .navbar-item,
+    .navbar.is-project .navbar-link{
+      font-weight: 800;
+      color: var(--text);
+      background: transparent;
+    }
+    .navbar.is-project .navbar-item:hover,
+    .navbar.is-project .navbar-link:hover{
+      color: var(--accent);
+      background: transparent;
+    }
+
+    .navbar.is-project .navbar-burger span{
+      background: var(--text);
+    }
+
+    .brand-mark{
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 16px rgba(37,99,235,0.25);
+      display: inline-block;
+      margin-right: 10px;
+      transform: translateY(1px);
+    }
+
+    /* Active link */
+    .navbar.is-project .navbar-item.is-active-link{
+      color: var(--accent);
+      background: rgba(37,99,235,0.08);
+      border-radius: 999px;
+    }
+
+    /* Keep spacing nice on desktop */
+    .navbar-end .navbar-item{
+      margin: 6px 4px;
+      border-radius: 999px;
+    }
+
+    /* -----------------------------
+       PAGE STYLES
+    ------------------------------ */
+    .container.is-max-desktop{ max-width: 980px; }
+
+    .publication-title{
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      font-weight: 950;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-top: 18px;
+    }
+
+    .subtitle-ish{
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-top: 10px;
+    }
+
+    .author-line a{
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(37,99,235,0.25);
+    }
+    .author-line a:hover{
+      color: var(--accent);
+      border-bottom-color: rgba(37,99,235,0.6);
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin-top: 18px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 900;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      border-color: rgba(37,99,235,0.25);
+      box-shadow: 0 10px 28px rgba(2,6,23,0.10);
+    }
+    .pill .dot{
+      width: 10px; height: 10px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+
+    .panelish{
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title{
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      font-weight: 950;
+      letter-spacing: -0.02em;
+    }
+
+    .content p, .content li{ color: var(--muted); }
+    .content strong{ color: var(--text); }
+
+    .mini-note{ color: var(--muted2); font-size: 0.95rem; }
+
+    .tag.is-soft{
+      background: rgba(37,99,235,0.10);
+      color: rgba(37,99,235,0.95);
+      border: 1px solid rgba(37,99,235,0.18);
+      font-weight: 900;
+    }
+
+    video, img{
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .codeblock{
+      background: #0b1020;
+      color: rgba(255,255,255,0.92);
+      border-radius: 14px;
+      padding: 14px;
+      overflow:auto;
+      border: 1px solid rgba(255,255,255,0.10);
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+
+    .citation pre{
+      white-space: pre-wrap;
+      word-break: break-word;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+      color: var(--text);
+    }
+
+    .footer{
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    /* nicer spacing on mobile */
+    @media (max-width: 768px){
+      .publication-title{ font-size: 2rem !important; }
+      .panelish{ padding: 18px; }
+      section[id]{ scroll-margin-top: 110px; }
+    }
+  </style>
+
+  <script>
+    // Copy citation
+    function copyCitation(){
+      const el = document.getElementById("citationText");
+      const text = el.textContent.trim();
+      navigator.clipboard?.writeText(text).then(() => {
+        const btn = document.getElementById("copyBtn");
+        const old = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(()=>btn.textContent=old, 1200);
+      }).catch(() => {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      });
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(() => document.getElementById("intro")?.remove(), 4300);
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Burger menu
+      const burger = document.querySelector(".navbar-burger");
+      const menu = document.querySelector("#navMenu");
+      burger?.addEventListener("click", () => {
+        burger.classList.toggle("is-active");
+        menu.classList.toggle("is-active");
+      });
+
+      // Close menu after click (mobile)
+      menu?.querySelectorAll("a.navbar-item").forEach(a => {
+        a.addEventListener("click", () => {
+          burger?.classList.remove("is-active");
+          menu?.classList.remove("is-active");
+        });
+      });
+
+      // Active nav (scroll-position logic; robust)
+      const navbar = document.querySelector(".navbar.is-project");
+      const navHeight = () => (navbar?.offsetHeight || 72);
+
+      const navLinks = new Map();
+      document.querySelectorAll("[data-nav]").forEach(a => {
+        navLinks.set(a.getAttribute("data-nav"), a);
+      });
+
+      const sectionIds = ["top","overview","benchmark","datasets","training","evaluation","contact","citation"];
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+      function setActive(id){
+        document.querySelectorAll(".navbar-item.is-active-link")
+          .forEach(x => x.classList.remove("is-active-link"));
+        const link = navLinks.get(id);
+        if(link) link.classList.add("is-active-link");
+      }
+
+      function onScroll(){
+        const y = window.scrollY + navHeight() + 16;
+        let current = sections[0]?.id || "top";
+        for(const s of sections){
+          if (s.offsetTop <= y) current = s.id;
+          else break;
+        }
+        setActive(current);
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      onScroll();
+    });
+  </script>
+</head>
+
+<body>
+
+  <!-- Intro teaser -->
+  <div id="intro">
+    <div class="logo-wrapper">
+      <svg class="logo" viewBox="0 0 250 120" aria-label="Logo">
+        <path d="M20 90 L70 20 L120 90 L170 20 L220 90" />
+      </svg>
+      <div class="logo-text">ViterbiPlanNet</div>
+      <div class="logo-sub">Differentiable Viterbi for Planning in Instructional Videos</div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar is-project" role="navigation" aria-label="main navigation">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#top" data-nav="top">
+          <span class="brand-mark"></span>
+          ViterbiPlanNet
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item" href="#overview" data-nav="overview">Overview</a>
+          <a class="navbar-item" href="#benchmark" data-nav="benchmark">Why this code</a>
+          <a class="navbar-item" href="#datasets" data-nav="datasets">Datasets</a>
+          <a class="navbar-item" href="#contact" data-nav="contact">Contact</a>
+          <!--<a class="navbar-item" href="#citation" data-nav="citation">Citation</a>-->
+          <a class="navbar-item" href="#authors" data-nav="authors">Authors</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO / TOP -->
+  <section id="top" class="section" style="padding-top: 26px;">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <div class="tags is-centered">
+          <span class="tag is-soft">CVPR 2026</span>
+          <span class="tag is-light" style="border:1px solid var(--line); font-weight:800;">Procedural Planning</span>
+          <span class="tag is-light" style="border:1px solid var(--line); font-weight:800;">Differentiable Viterbi</span>
+        </div>
+
+        <h1 class="title is-1 publication-title">
+          ViterbiPlanNet: Injecting Procedural Knowledge via Differentiable Viterbi for Planning in Instructional Videos
+        </h1>
+
+        <p class="subtitle-ish">
+          A principled framework that explicitly integrates procedural knowledge into the learning process for procedural planning in instructional videos.
+        </p>
+
+        <p class="author-line" style="margin-top: 12px;">
+          <a href="https://seminaraluigi.altervista.org/" target="_blank" rel="noopener">Luigi Seminara</a><sup>1,†</sup>,
+          <a href="https://www.davidemoltisanti.com/research/" target="_blank" rel="noopener">Davide Moltisanti</a><sup>2,*</sup>,
+          <a href="https://antoninofurnari.github.io/" target="_blank" rel="noopener">Antonino Furnari</a><sup>1,*</sup>
+        </p>
+
+        <p class="mini-note" style="margin-top: 6px;">
+          <strong>(1)</strong> University of Catania &nbsp;•&nbsp; <strong>(2)</strong> University of Bath <br/>
+          <strong>*</strong> Equal advising &nbsp;•&nbsp; <strong>†</strong> Work done while visiting University of Bath
+        </p>
+
+        <div class="pill-row">
+          <a class="pill" href="#" title="Coming soon"><span class="dot"></span>arXiv (soon)</a>
+          <a class="pill" href="https://github.com/Gigi-G/ViterbiPlanNet" target="_blank" rel="noopener"><span class="dot"></span>Code</a>
+          <a class="pill" href="https://github.com/Gigi-G/ViterbiPlanNet/issues" target="_blank" rel="noopener"><span class="dot"></span>Issues</a>
+        </div>
+      </div>
+
+    <!-- Teaser -->
+    <div style="margin-top: 26px;">
+      <div class="panelish">
+        <img src="./assets/teaser.svg" alt="ViterbiPlanNet Overview" width="100%" style="display:block;">
+      </div>
+    </div>
+
+      <!-- News -->
+      <div style="margin-top: 18px;">
+        <div class="panelish">
+          <h2 class="title is-4 section-title">📢 News</h2>
+          <ul class="content" style="margin-top: 10px;">
+            <li><strong>February, 2026</strong> — We release the ViterbiPlanNet codebase and features.</li>
+            <li><strong>February, 2026</strong> — <em>ViterbiPlanNet</em> is accepted at <strong>CVPR 2026</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview" class="section">
+    <div class="container is-max-desktop">
+      <div class="panelish">
+        <h2 class="title is-3 section-title has-text-centered">Overview</h2>
+        <div class="content">
+          <p>
+            Procedural planning aims to predict a sequence of actions that transforms an initial visual state into a desired goal.
+            ViterbiPlanNet introduces a <strong>Differentiable Viterbi Layer (DVL)</strong> that embeds a
+            <strong>Procedural Knowledge Graph (PKG)</strong> directly within Viterbi decoding. This enables
+            <strong>graph-based decoding during training</strong>, making the full system trainable end-to-end.
+          </p>
+          <p><strong>Key features:</strong></p>
+          <ul>
+            <li><strong>Explicit Procedural Knowledge:</strong> integrates a PKG to guide planning.</li>
+            <li><strong>Differentiable Viterbi Layer (DVL):</strong> smooth relaxations replace non-differentiable operations.</li>
+            <li><strong>State-of-the-art performance:</strong> strong results on CrossTask, COIN, and NIV with fewer parameters than diffusion/LLM planners.</li>
+            <li><strong>Sample efficiency:</strong> structure-aware training improves robustness and efficiency.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why this code -->
+  <section id="benchmark" class="section">
+    <div class="container is-max-desktop">
+      <div class="panelish">
+        <h2 class="title is-3 section-title has-text-centered">Why this code</h2>
+        <div class="content">
+          <p>
+            We establish and open-source a <strong>standardized evaluation benchmark</strong> that unifies
+            <strong>data splits</strong> and <strong>evaluation metrics implementations</strong>, providing fair and rigorous comparisons
+            and addressing key inconsistencies in prior work.
+          </p>
+          <p class="mini-note">
+            Metrics include <strong>Success Rate</strong>, <strong>mAcc</strong>, and <strong>mIoU</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Datasets -->
+  <section id="datasets" class="section">
+    <div class="container is-max-desktop">
+      <div class="panelish">
+        <h2 class="title is-3 section-title has-text-centered">Datasets</h2>
+        <div class="content">
+          <p>The project supports three public datasets for procedural planning:</p>
+          <ul>
+            <li><strong>CrossTask</strong> (see <code>./dataset/CrossTask</code>)</li>
+            <li><strong>COIN</strong> (see <code>./dataset/COIN</code>)</li>
+            <li><strong>NIV</strong> (see <code>./dataset/NIV</code>)</li>
+          </ul>
+
+          <p class="mini-note">
+            In our experiments we used pre-extracted S3D features:
+          </p>
+
+          <div class="columns is-multiline" style="margin-top: 10px;">
+            <div class="column is-one-third">
+              <a class="button is-fullwidth is-link is-light" href="https://drive.google.com/file/d/146VQTl9Pw4VmmlTUt3RVmZtDW8Dcw4uL/view?usp=drive_link" title="CrossTask feature link">
+                Download CrossTask features
+              </a>
+            </div>
+            <div class="column is-one-third">
+              <a class="button is-fullwidth is-link is-light" href="https://drive.google.com/file/d/1aQAUQP8jpmZW3iqzVoSeDGJfJOT3-8sv/view?usp=drive_link" title="COIN feature link">
+                Download COIN features
+              </a>
+            </div>
+            <div class="column is-one-third">
+              <a class="button is-fullwidth is-link is-light" href="https://drive.google.com/file/d/1nmsYW0hRGWChCfuTnsvn8lfW2YWmFTfA/view?usp=drive_link" title="NIV feature link">
+                Download NIV features
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container is-max-desktop">
+      <div class="panelish">
+        <h2 class="title is-3 section-title has-text-centered">Contact</h2>
+        <div class="content">
+          <p>
+            This repository is created and maintained by
+            <a href="https://seminaraluigi.altervista.org/" target="_blank" rel="noopener"><strong>Luigi</strong></a>.
+            Technical questions and discussions are encouraged via
+            <a href="https://github.com/Gigi-G/ViterbiPlanNet/issues" target="_blank" rel="noopener"><strong>GitHub issues</strong></a>.
+          </p>
+          <p>
+            You can also reach me via email:
+            <a href="mailto:luigi.seminara@phd.unict.it?subject=Inquiry about your paper ViterbiPlanNet&cc=antonino.furnari@unict.it;dm2460@bath.ac.uk">
+              luigi.seminara@phd.unict.it
+            </a>
+          </p>
+
+          <div class="buttons" style="margin-top: 10px;">
+            <a class="button is-link is-light" href="https://it.linkedin.com/in/luigi-seminara-3bb2a2204" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="button is-dark" href="https://x.com/Gigii_Gii" target="_blank" rel="noopener">X</a>
+            <a class="button is-link" href="https://github.com/Gigi-G/ViterbiPlanNet" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authors -->
+  <section id="authors" class="section">
+    <div class="container is-max-desktop">
+      <div class="panelish">
+        <h2 class="title is-3 section-title has-text-centered">Authors</h2>
+        <div class="content">
+            <div style="margin-top: 26px;">
+                <img src="./assets/authors.svg" alt="Authors of ViterbiPlanNet" width="100%" style="display:block;">
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation 
+  <section id="citation" class="section">
+    <div class="container is-max-desktop">
+      <div class="panelish citation">
+        <h2 class="title is-3 section-title has-text-centered">Citation</h2>
+        <p class="mini-note has-text-centered">Click to copy BibTeX.</p>
+
+        <pre id="citationText">@inproceedings{seminara2026viterbiplannet,
+  title     = {ViterbiPlanNet: Injecting Procedural Knowledge via Differentiable Viterbi for Planning in Instructional Videos},
+  author    = {Seminara, Luigi and Moltisanti, Davide and Furnari, Antonino},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</pre>
+
+        <div class="has-text-centered" style="margin-top: 12px;">
+          <button id="copyBtn" class="button is-link" onclick="copyCitation()">Copy Citation</button>
+        </div>
+      </div>
+    </div>
+  </section>-->
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p class="mini-note">© <span id="year"></span> ViterbiPlanNet — CVPR 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
