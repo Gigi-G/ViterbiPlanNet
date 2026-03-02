@@ -40,6 +40,7 @@ We establish and open-source a standardized evaluation benchmark, which unifies 
 - [Training](#training)
 - [Evaluation](#evaluation)
 - [Data and format](#data-and-format)
+- [Authors](#authors)
 - [Contact](#contact)
 - [The Evolution of Procedural Planning](#the-evolution-of-procedural-planning)
 ---
@@ -191,6 +192,9 @@ Adding new datasets is possible, and they must respect the following format (exa
 
 ## Contact
 This repository is created and maintained by [Luigi](https://seminaraluigi.altervista.org/). Technical questions and discussions are encouraged via [GitHub issues](https://github.com/Gigi-G/ViterbiPlanNet/issues), as this allows everyone interested in the work to benefit from the shared information. However, you can always reach us directly via <a href="mailto:luigi.seminara@phd.unict.it?subject=Inquiry about your paper ViterbiPlanNet&cc=antonino.furnari@unict.it;dm2460@bath.ac.uk">email</a>.
+
+## Authors
+![Authors](./assets/Authors.svg)
 
 ---
 
