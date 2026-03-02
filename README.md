@@ -7,12 +7,10 @@
 - ($\*$): Equal advising
 - ($\dagger$): Work done while visiting University of Bath
 
-arXiv pre-print (Coming very soon!) | Project page (Coming very soon!)
+arXiv pre-print (Coming very soon!) | [Project page](https://gigi-g.github.io/ViterbiPlanNet/)
 
-[![Stargazers][stars-shield]][stars-url]
-[![Forks][forks-shield]][forks-url]
+
 [![Issues][issues-shield]][issues-url]
-
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![X][x-shield]][x-url]
 
@@ -238,10 +236,7 @@ While the natural language formulation offers interesting applications for virtu
 - Zhao, He, Isma Hadji, Nikita Dvornik, Konstantinos G. Derpanis, Richard P. Wildes, and Allan D. Jepson. “P3 IV: Probabilistic Procedure Planning from Instructional Videos with Weak Supervision.” 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), June 2022, 2928–38. https://doi.org/10.1109/CVPR52688.2022.00295.
 - Zhou, Yufan, Zhaobo Qi, Lingshuai Lin, et al. “Masked Temporal Interpolation Diffusion for Procedure Planning in Instructional Videos.” arXiv:2507.03393. ICLR 2025, July 4, 2025. https://doi.org/10.48550/arXiv.2507.03393.
 
-[forks-shield]: https://img.shields.io/github/forks/Gigi-G/ViterbiPlanNet.svg?style=for-the-badge
-[forks-url]: https://github.com/Gigi-G/ViterbiPlanNet/network/members
-[stars-shield]: https://img.shields.io/github/stars/Gigi-G/ViterbiPlanNet.svg?style=for-the-badge
-[stars-url]: https://github.com/Gigi-G/ViterbiPlanNet/stargazers
+
 [issues-shield]: https://img.shields.io/github/issues/Gigi-G/ViterbiPlanNet.svg?style=for-the-badge
 [issues-url]: https://github.com/Gigi-G/ViterbiPlanNet/issues
 [license-shield]: https://img.shields.io/github/license/fGigi-G/ViterbiPlanNet.svg?style=for-the-badge
