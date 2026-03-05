@@ -7,7 +7,7 @@
 - ($\*$): Equal advising
 - ($\dagger$): Work done while visiting University of Bath
 
-arXiv pre-print (Coming very soon!) | [Project page](https://gigi-g.github.io/ViterbiPlanNet/)
+[arXiv pre-print](https://arxiv.org/pdf/2603.04265) | [Project page](https://gigi-g.github.io/ViterbiPlanNet/)
 
 
 [![Issues][issues-shield]][issues-url]
