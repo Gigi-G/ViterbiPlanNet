@@ -1,0 +1,41 @@
+CUDA_VISIBLE_DEVICES=0 python main.py \
+    --batch_size 256 \
+    --batch_size_val 256 \
+    --epochs 500 \
+    --horizon 3 \
+    --M 2 \
+    --aug_range 0 \
+    --dataset coin \
+    --action_dim 778 \
+    --observation_dim 1536 \
+    --train_json '../../dataset/COIN/coin_train_70_3.json' \
+    --valid_json '../../dataset/COIN/coin_test_30_3.json' \
+    --checkpoint_root 'checkpoints' \
+    --saved_path 'checkpoints' \
+    --log_root 'logs' \
+    --cudnn_benchmark 1 \
+    --pin_memory \
+    --resume \
+    --evaluate \
+    --seed 7 && \
+    CUDA_VISIBLE_DEVICES=0 python inference.py \
+    --batch_size 256 \
+    --batch_size_val 256 \
+    --epochs 500 \
+    --horizon 3 \
+    --horizon_test 3 \
+    --M 2 \
+    --aug_range 0 \
+    --dataset coin \
+    --action_dim 778 \
+    --observation_dim 1536 \
+    --train_json '../../dataset/COIN/coin_train_70_3.json' \
+    --valid_json '../../dataset/COIN/coin_test_30_3.json' \
+    --checkpoint_root 'checkpoints' \
+    --saved_path 'checkpoints' \
+    --log_root 'logs' \
+    --cudnn_benchmark 1 \
+    --pin_memory \
+    --resume \
+    --evaluate \
+    --seed 7

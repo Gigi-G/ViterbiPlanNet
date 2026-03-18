@@ -1,0 +1,41 @@
+CUDA_VISIBLE_DEVICES=0 python main.py \
+    --batch_size 256 \
+    --batch_size_val 256 \
+    --epochs 200 \
+    --horizon 3 \
+    --M 2 \
+    --aug_range 0 \
+    --dataset crosstask \
+    --action_dim 133 \
+    --observation_dim 1536 \
+    --train_json '../../dataset/CrossTask/train_list_3_133.json' \
+    --valid_json '../../dataset/CrossTask/test_list_3_133.json' \
+    --checkpoint_root 'checkpoints' \
+    --saved_path 'checkpoints' \
+    --log_root 'logs' \
+    --cudnn_benchmark 1 \
+    --pin_memory \
+    --resume \
+    --evaluate \
+    --seed 7 && \
+    CUDA_VISIBLE_DEVICES=0 python inference.py \
+    --batch_size 256 \
+    --batch_size_val 256 \
+    --epochs 200 \
+    --horizon 3 \
+    --horizon_test 3 \
+    --M 2 \
+    --aug_range 0 \
+    --dataset crosstask \
+    --action_dim 133 \
+    --observation_dim 1536 \
+    --train_json '../../dataset/CrossTask/train_list_3_133.json' \
+    --valid_json '../../dataset/CrossTask/test_list_3_133.json' \
+    --checkpoint_root 'checkpoints' \
+    --saved_path 'checkpoints' \
+    --log_root 'logs' \
+    --cudnn_benchmark 1 \
+    --pin_memory \
+    --resume \
+    --evaluate \
+    --seed 7
